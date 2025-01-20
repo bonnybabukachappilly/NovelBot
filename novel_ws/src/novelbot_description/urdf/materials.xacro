@@ -1,0 +1,95 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://ros.org/wiki/xacro">
+    <xacro:include filename="$(find novelbot_description)/urdf/colours.xacro"/>
+
+    <xacro:macro name="material_orange">
+        <material name="">
+            <color rgba="${orange}"/>
+        </material>
+    </xacro:macro>
+
+    <xacro:macro name="material_graphite_white">
+        <material name="">
+            <color rgba="${graphite_white}"/>
+        </material>
+    </xacro:macro>
+
+    <xacro:macro name="material_white">
+        <material name="">
+            <color rgba="${white}"/>
+        </material>
+    </xacro:macro>
+
+    <xacro:macro name="material_pebble_gray">
+        <material name="">
+            <color rgba="${pebble_gray}"/>
+        </material>
+    </xacro:macro>
+
+    <xacro:macro name="material_dark_gray">
+        <material name="">
+            <color rgba="${dark_gray}"/>
+        </material>
+    </xacro:macro>
+
+    <xacro:macro name="material_black">
+        <material name="">
+            <color rgba="${black}"/>
+        </material>
+    </xacro:macro>
+
+    <xacro:macro name="material_signal_red">
+        <material name="">
+            <color rgba="${signal_red}"/>
+        </material>
+    </xacro:macro>
+
+    <xacro:macro name="material_carmine_red">
+        <material name="">
+            <color rgba="${carmine_red}"/>
+        </material>
+    </xacro:macro>
+
+    <xacro:macro name="material_ultramarine_blue">
+        <material name="">
+            <color rgba="${ultramarine_blue}"/>
+        </material>
+    </xacro:macro>
+
+    <xacro:macro name="material_sky_blue">
+        <material name="">
+            <color rgba="${sky_blue}"/>
+        </material>
+    </xacro:macro>
+
+    <xacro:macro name="material_leaf_green">
+        <material name="">
+            <color rgba="${leaf_green}"/>
+        </material>
+    </xacro:macro>
+
+    <xacro:macro name="material_olive_green">
+        <material name="">
+            <color rgba="${olive_green}"/>
+        </material>
+    </xacro:macro>
+
+    <xacro:macro name="material_gray_white">
+        <material name="">
+            <color rgba="${gray_white}"/>
+        </material>
+    </xacro:macro>
+
+    <xacro:macro name="material_pure_white">
+        <material name="">
+            <color rgba="${pure_white}"/>
+        </material>
+    </xacro:macro>
+
+    <xacro:macro name="material_yellow">
+        <material name="">
+            <color rgba="${yellow}"/>
+        </material>
+    </xacro:macro>
+
+</robot>

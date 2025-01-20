@@ -1,0 +1,91 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro">
+
+    <xacro:macro name="standoff" params="name parent *origin">
+
+        <joint name="${name}_joint" type="fixed">
+            <xacro:insert_block name="origin"/>
+            <parent link="${parent}" />
+            <child link="${name}" />
+        </joint>
+
+        <link name="${name}">
+
+            <visual>
+                <origin xyz="0 0 0"/>
+                <geometry>
+                    <mesh filename="package://novelbot_description/meshes/visual/standoff_spacer.stl"/>
+                </geometry>
+                <xacro:material_yellow />
+            </visual>
+
+            <collision>
+                <origin xyz="0 0 0"/>
+                <geometry>
+                    <mesh filename="package://novelbot_description/meshes/visual/standoff_spacer.stl"/>
+                </geometry>
+            </collision>
+
+            <xacro:inertial_cylinder mass="${standoff_mass}" length="${standoff_width}" radius="${standoff_height}">
+                <origin xyz="0 0 0"/>
+            </xacro:inertial_cylinder>
+        </link>
+    </xacro:macro>
+
+    <xacro:macro name="wheel_set" params="side parent *origin *axis">
+
+        <!-- MOTOR -->
+        <joint name="${side}motor_joint" type="fixed">
+            <xacro:insert_block name="origin"/>
+            <parent link="${parent}" />
+            <child link="${side}_motor" />
+        </joint>
+
+        <link name="${side}_motor">
+            <visual>
+                <geometry>
+                    <mesh filename="package://novelbot_description/meshes/visual/n20_motor.stl"/>
+                </geometry>
+                <xacro:material_pebble_gray />
+            </visual>
+            <collision>
+                <origin xyz="0 0 0"/>
+                <geometry>
+                    <mesh filename="package://novelbot_description/meshes/visual/n20_motor.stl"/>
+                </geometry>
+            </collision>
+            <xacro:inertial_cylinder mass="${motor_mass}" length="${motor_length}" radius="${motor_width}">
+                <origin xyz="0 0 0"/>
+            </xacro:inertial_cylinder>
+        </link>
+
+        <!-- WHEEL -->
+        <joint name="${side}_wheel_joint" type="continuous">
+            <origin xyz="0 ${motor_length+wheel_width/2 -0.001} ${motor_gear_offset}" rpy="0 0 0"/>
+            <parent link="${side}_motor" />
+            <child link="${side}_wheel" />
+            <xacro:insert_block name="axis"/>
+        </joint>
+
+        <link name="${side}_wheel">
+            <visual>
+                <geometry>
+                    <mesh filename="package://novelbot_description/meshes/visual/n20_motor_wheel.stl"/>
+                </geometry>
+                <xacro:material_black />
+            </visual>
+            <collision>
+                <origin xyz="0 0 0"/>
+                <geometry>
+                    <mesh filename="package://novelbot_description/meshes/visual/n20_motor_wheel.stl"/>
+                </geometry>
+            </collision>
+            <xacro:inertial_cylinder mass="${wheel_mass}" length="${wheel_width}" radius="${wheel_diameter/2}">
+                <origin xyz="0 0 0"/>
+            </xacro:inertial_cylinder>
+        </link>
+    </xacro:macro>
+
+
+
+</robot>

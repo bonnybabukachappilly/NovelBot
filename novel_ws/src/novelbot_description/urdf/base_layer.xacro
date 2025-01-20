@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro">
+
+    <!-- BASE LINK -->
+    <link name="base_link" />
+
+    <!-- ************************ BASE LAYER ************************ -->
+    <joint name="bl_joint" type="fixed">
+        <origin xyz="-${wheel_diameter/2 + 0.005} 0 0"/>
+        <parent link="base_link" />
+        <child link="base_layer_chassis" />
+    </joint>
+
+    <link name="base_layer_chassis">
+        <visual>
+            <origin xyz="${chassis_length/2} 0 ${chassis_height/2}"/>
+            <geometry>
+                <box size="${chassis_length} ${chassis_width} ${chassis_height}"/>
+            </geometry>
+            <xacro:material_signal_red />
+        </visual>
+        <collision>
+            <origin xyz="${chassis_length/2} 0 ${chassis_height/2}"/>
+            <geometry>
+                <box size="${chassis_length} ${chassis_width} ${chassis_height}"/>
+            </geometry>
+        </collision>
+        <xacro:inertial_box mass="${chassis_mass}" x="${chassis_length}" y="${chassis_width}" z="${chassis_height}">
+            <origin xyz="${chassis_length/2} 0 ${chassis_height/2}"/>
+        </xacro:inertial_box>
+    </link>
+
+    <!-- ************************ WHEEL ************************ -->
+    <!-- LEFT MOTOR -->
+    <xacro:wheel_set side="left" parent="base_link">
+        <origin xyz="0 ${chassis_width/2-motor_length+0.001} ${chassis_height + motor_height/2}" rpy="0 ${pi} 0"/>
+        <axis xyz="0 1 0"/>
+    </xacro:wheel_set>
+
+    <!-- RIGHT MOTOR -->
+    <xacro:wheel_set side="right" parent="base_link">
+        <origin xyz="0 -${chassis_width/2-motor_length+0.001} ${chassis_height + motor_height/2}" rpy="${pi} 0 0"/>
+        <axis xyz="0 -1 0"/>
+    </xacro:wheel_set>
+
+    <!-- ************************ CASTER ************************ -->
+    <!-- CASTER BASE -->
+    <joint name="caster_base_joint" type="fixed">
+        <origin xyz="${chassis_length-wheel_diameter/2 -caster_width} 0 0" rpy="${pi/2} 0 ${pi/2}"/>
+        <parent link="base_link" />
+        <child link="caster_base" />
+    </joint>
+
+    <link name="caster_base">
+        <visual>
+            <origin xyz="0 0 0"/>
+            <geometry>
+                <mesh filename="package://novelbot_description/meshes/visual/caster_base.stl"/>
+            </geometry>
+            <xacro:material_white />
+        </visual>
+        <collision>
+            <origin xyz="0 0 0"/>
+            <geometry>
+                <mesh filename="package://novelbot_description/meshes/visual/caster_base.stl"/>
+            </geometry>
+        </collision>
+        <xacro:inertial_cylinder mass="${caster_mass/2}" length="${caster_height}" radius="${caster_width}">
+            <origin xyz="0 0 0"/>
+        </xacro:inertial_cylinder>
+    </link>
+
+    <!-- CASTER WHEEL -->
+    <joint name="caster_wheel_joint" type="fixed">
+        <origin xyz="0 0 0" rpy="0 0 0"/>
+        <parent link="caster_base" />
+        <child link="caster_wheel" />
+    </joint>
+
+    <link name="caster_wheel">
+        <visual>
+            <origin xyz="0 0 0"/>
+            <geometry>
+                <mesh filename="package://novelbot_description/meshes/visual/caster_wheel.stl"/>
+            </geometry>
+            <xacro:material_dark_gray />
+        </visual>
+        
+        <collision>
+            <origin xyz="0 0 0"/>
+            <geometry>
+                <mesh filename="package://novelbot_description/meshes/visual/caster_wheel.stl"/>
+            </geometry>
+        </collision>
+        
+        <xacro:inertial_sphere mass="${caster_mass/2}" radius="${caster_ball_diameter/2}">
+            <origin xyz="0 0 0"/>
+        </xacro:inertial_sphere>
+    </link>
+
+    <!-- ************************ STANDOFFS ************************ -->
+    <xacro:standoff name="bl_standoff" parent="base_link">
+        <origin xyz="-${wheel_diameter/2 + 0.005 - standoff_width} ${chassis_width/2-standoff_width} ${chassis_height}" rpy="0 0 0"/>
+    </xacro:standoff>
+    
+    <xacro:standoff name="br_standoff" parent="base_link">
+        <origin xyz="-${wheel_diameter/2 + 0.005 - standoff_width} -${chassis_width/2-standoff_width} ${chassis_height}" rpy="0 0 0"/>
+    </xacro:standoff>
+    
+    <xacro:standoff name="fr_standoff" parent="base_link">
+        <origin xyz="${chassis_length - wheel_diameter/2 -  0.005 - standoff_width} ${chassis_width/2-standoff_width} ${chassis_height}" rpy="0 0 0"/>
+    </xacro:standoff>
+    
+    <xacro:standoff name="fl_standoff" parent="base_link">
+        <origin xyz="${chassis_length - wheel_diameter/2 -  0.005 - standoff_width} -${chassis_width/2-standoff_width} ${chassis_height}" rpy="0 0 0"/>
+    </xacro:standoff>
+
+</robot>

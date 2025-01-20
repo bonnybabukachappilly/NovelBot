@@ -167,12 +167,45 @@
             "dependsOrder": "sequence",
             "problemMatcher": []
         },
-        // RUNNING PROGRAMS
         {
-            "label": "Command: package | name",
+            "label": "Group: Reset & Launch novelbot_description [Symlink]",
+            "dependsOn": [
+                "Colcon: Clean & Build [Symlink]",
+                "Launch: novelbot_description | novelbot",
+            ],
+            "dependsOrder": "sequence",
+            "problemMatcher": []
+        },
+        // ***********************************************************************
+        // ***************************** PROGRAMS ********************************
+        // ***********************************************************************
+        {
+            "label": "Launch: novelbot_description | novelbot",
             "type": "shell",
             "linux": {
-                "command": "source ./install/setup.bash && "
+                "command": "source ./install/setup.bash && ros2 launch novelbot_description novelbot_description.launch.py"
+            },
+            "options": {
+                "cwd": "${workspaceFolder}/${config:ros_workspace}/"
+            },
+            "problemMatcher": []
+        },
+        {
+            "label": "Launch: novelbot_description | novelbot description",
+            "type": "shell",
+            "linux": {
+                "command": "source ./install/setup.bash && ros2 launch novelbot_description novelbot_description_only.launch.py"
+            },
+            "options": {
+                "cwd": "${workspaceFolder}/${config:ros_workspace}/"
+            },
+            "problemMatcher": []
+        },
+        {
+            "label": "Launch: novelbot_description | novelbot rviz",
+            "type": "shell",
+            "linux": {
+                "command": "source ./install/setup.bash && ros2 launch novelbot_description novelbot_description_rviz.launch.py"
             },
             "options": {
                 "cwd": "${workspaceFolder}/${config:ros_workspace}/"

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro">
+
+    <xacro:include filename="$(find novelbot_description)/urdf/materials.xacro"/>
+    <xacro:include filename="$(find novelbot_description)/urdf/novel_properties.xacro"/>
+    <xacro:include filename="$(find novelbot_description)/urdf/inertial_macros.xacro"/>
+    <xacro:include filename="$(find novelbot_description)/urdf/component_macros.xacro"/>
+
+    <xacro:include filename="$(find novelbot_description)/urdf/base_layer.xacro"/>
+    <xacro:include filename="$(find novelbot_description)/urdf/first_layer.xacro"/>
+    <xacro:include filename="$(find novelbot_description)/urdf/electronics.xacro"/>
+
+</robot>

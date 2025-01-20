@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<robot name="novelbot"
+    xmlns:xacro="http://www.ros.org/wiki/xacro">
+    <xacro:include filename="novelbot.xacro" />
+</robot>
